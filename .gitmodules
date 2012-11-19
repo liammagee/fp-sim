@@ -1,0 +1,3 @@
+[submodule "public/javascripts/fp-core"]
+	path = public/javascripts/fp-core
+	url = https://github.com/doclm/fp-core.git

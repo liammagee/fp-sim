@@ -1,0 +1,58 @@
+extends layout
+
+//!= partial('partials/gameworld')
+
+block content
+  .header-wrapper
+    .container_12
+      .clear(style='height: 10px')
+      .grid_10
+        h1.grid_3.alpha.HeaderTagLine World Vision Australia
+        .grid_1.HeaderPhone
+          .PhoneIcon
+          h1 13 32 40
+        .grid_3.HeaderLogin.form
+        .grid_3.HeaderSearch.omega
+        .clear
+        .grid_3.alpha.omega
+        .clear
+      .grid_2
+        a(href='http://www.worldvision.com.au/')
+          img(src='http://www.worldvision.com.au//Css/images/logo.gif')
+      .clear
+    .header-end
+    .clear
+  .clear(style='height: 20px')
+  .container_12
+  .clear
+  .container_12
+    #NF
+      .NFShow#NF0
+        #content-pane
+        #nav
+          #world-parameters
+          #swatch
+        #map
+          section.body
+            //#map_canvas
+            #gameworld(z-index='1')
+              #world-container(z-index='1')
+                canvas#imageCanvas(z-index='1')
+                #map_canvas(z-index='2')
+                  #actual_map
+                canvas.scrollable-canvas#baseCanvas(z-index='3')
+                canvas.scrollable-canvas#guideCanvas(z-index='4')
+                canvas.scrollable-canvas#agentCanvas(z-index='5')
+                canvas.scrollable-canvas#resourceCanvas(z-index='6')
+                canvas#scrollingCanvas(z-index='7', resize='true')
+                canvas#noticeCanvas(z-index='8')
+              #graph-area
+                #world-graph
+  .clear
+  .footer_start
+  .container_12.FooterSections
+  .footer_end
+  .clear
+  .disclaimer
+  .container_12
+
