@@ -1,0 +1,254 @@
+/* HEADER
+ * This contains the CSS for WVA stuff that is also required on currently live pages using the WorldVision masterpages. 
+ * Most significantly, this is the header and buttons for the site.
+ * Eventually this will be merged into WVA_Generic.css, but must stay separate so long as the old masterpages are in use. 
+ */
+.GoogleSiteSearchBox {
+  height: 18px;
+  width: 138px;
+  float: right;
+  padding: 0;
+  padding: 1px;
+  margin: 0px 0px 2px 2px;
+}
+.GSS_Text {
+  float: none;
+  font-size: 11px;
+  margin: 2px 0 1px 0px;
+  width: 108px;
+  color: #756c64;
+  height: 16px;
+  background: transparent;
+  float: left;
+  padding: 0px 3px 0px 3px;
+  font-family: arial, Sans-Serif;
+  font-size: 11px !important;
+}
+.GSS_Text label {
+  display: none;
+}
+.GSS_Submit {
+  width: 15px;
+  height: 15px;
+  border: none;
+  background: transparent url(//cdn.worldvision.com.au/img/sprite.png) no-repeat -945px -86px;
+  cursor: pointer;
+  padding: 0;
+  margin: 2px;
+  float: left;
+}
+.GSS_Submit:HOVER {
+  background-position: -945px -101px;
+}
+.header-wrapper .container_12 {
+  background: white;
+  position: relative;
+  z-index: 900;
+}
+.header-wrapper .header-end {
+  clear: both;
+  width: 960px;
+  background: transparent url(http://cdn.worldvision.com.au/img/sprite.png) no-repeat 0 -480px;
+  height: 10px;
+  margin: auto;
+}
+.HeaderTagLine,
+.HeaderPhone,
+.HeaderLogin,
+.HeaderSearch {
+  font-family: arial, Sans-Serif;
+  font-size: 13px;
+  margin-bottom: 0;
+  height: 24px;
+}
+.HeaderTagLine {
+  color: #ff6600;
+  font-style: italic;
+}
+.HeaderPhone H1 {
+  color: #666;
+  font-size: 12px;
+  float: left;
+  line-height: 110%;
+  margin-top: -0.2em;
+}
+.HeaderPhone .PhoneIcon {
+  margin-right: 5px;
+  background: #ffffff url(//cdn.worldvision.com.au/img/sprite.png) no-repeat -940px -22px;
+  float: left;
+  width: 7px;
+  height: 9px;
+}
+.login-text .login-button {
+  margin: 0;
+  padding: 0;
+}
+.login-text .info {
+  font-size: 11px;
+  color: #000;
+}
+.login-button a {
+  font-size: 11px;
+  margin-left: 10px;
+}
+.header-wrapper .login-button,
+.header-wrapper .login-text {
+  float: right;
+}
+/*MENU*/
+.WvMenuWrapper {
+  z-index: 900;
+  position: relative;
+  background: none;
+  height: 26px;
+  padding: 0;
+  font-size: 11px;
+  font-family: arial, Sans-Serif;
+  font-weight: normal;
+}
+.WvMenuWrapper a {
+  font-weight: normal;
+  z-index: 90000;
+}
+/*Wrappers*/
+div.WvMenu0Wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 90000;
+}
+div.WvMenu1Wrapper {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 90000;
+}
+div.WvMenu1Shifter {
+  position: absolute;
+  top: 0px;
+  z-index: 90000;
+}
+/*Slides*/
+div.WvMenu0Slide {
+  display: none;
+  top: 26px;
+  left: 0px;
+  position: absolute;
+  clear: both;
+  z-index: 90000;
+}
+div.WvMenu1Slide {
+  display: none;
+  position: absolute;
+  clear: both;
+  z-index: 90000;
+}
+/*Links*/
+a.WvMenu0 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #666666 url(images/header/TopNavButtonsFirstAndLast.gif) no-repeat -10px 0;
+  display: inline-block;
+  height: 22px;
+  padding-top: 4px;
+  text-align: center;
+  color: White;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #79706a;
+  z-index: 90000;
+}
+a.WvMenu0:HOVER {
+  color: White;
+}
+a.WvMenu0FIRST,
+a.WvMenu0LAST {
+  background: #666666 url(images/header/TopNavButtonsFirstAndLast.gif) no-repeat 0 0;
+}
+a.WvMenu0LAST {
+  background-position: right 0px;
+}
+a.WvMenu0OPEN,
+a.WvMenu0CURRENT {
+  background-position: -10px -26px;
+}
+a.WvMenu0FIRST.WvMenu0OPEN,
+a.WvMenu0FIRST.WvMenu0CURRENT {
+  background-position: 0 -26px;
+}
+a.WvMenu0LAST.WvMenu0OPEN,
+a.WvMenu0LAST.WvMenu0CURRENT {
+  background-position: right -26px;
+}
+a.WvMenu1,
+a.WvMenu2 {
+  display: block;
+  border: solid 1px #bbb;
+  border-bottom: none;
+  background-color: #dddddd;
+  margin: 0;
+  padding: 2px 14px 2px 8px;
+  height: 17px;
+  text-decoration: none;
+  color: black;
+  overflow: hidden;
+  z-index: 90000;
+}
+a.WvMenu1LAST,
+a.WvMenu2LAST {
+  border-bottom: solid 1px #bbb;
+}
+a.WvMenu1EXP {
+  background: #dddddd url(images/header/Level1Nav.gif) no-repeat top right;
+}
+a.WvMenu1CURRENT,
+a.WvMenu2CURRENT {
+  background-color: #FC0;
+  background-position: right -42px;
+}
+a.WvMenu1OPEN,
+a.WvMenu2:HOVER {
+  background-color: #ff6600;
+  background-position: right -21px;
+  color: #fff;
+  z-index: 90000;
+}
+.WvMenuDonateNow {
+  display: block;
+  float: right;
+  overflow: hidden;
+  height: 22px;
+  width: 140px;
+  background: transparent url(//cdn.worldvision.com.au/img/sprite.png) no-repeat -220px -418px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0px;
+  padding-top: 4px;
+  text-shadow: 1px 1px 0 #db5900;
+}
+a.WvMenuDonateNow {
+  font-weight: bold;
+}
+.WvMenuDonateNow:HOVER {
+  background-position: -220px -444px;
+  text-decoration: none;
+  color: White;
+}
+.form .logout-small {
+  background: url(/Images/content/theme/btn_logout_small.gif) no-repeat right;
+  display: block;
+  width: 65px;
+  height: 22px;
+  border: none;
+  cursor: pointer;
+}
+.JSwarning {
+  width: 910px;
+  margin: auto;
+  margin-top: 20px;
+  color: #ff6600;
+  padding-left: 30px;
+  background: transparent url(images/icons/warn.png) no-repeat;
+}
