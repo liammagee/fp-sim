@@ -29,7 +29,7 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
         _.extend(this.codeConference,
             {
                 id: 1,
-                name: "Fishermen's Bend",
+                name: "Code Conference",
                 introduction:
                     "<p>This model showcases a number of features relating to sustainable development.</p>" +
                         "<p>There are three output variables, modelling desirable features of the site: <em>Affordability</em>, <em>Sustainability</em> and <em>Mixed Use</em>.</p>" +
@@ -57,8 +57,8 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                 allowOffscreenCycling: false,
                 isPresetWorld: true,
                 interval: 1,
-                cellsAcross: 20,
-                cellsDown: 20,
+                cellsAcross: 15,
+                cellsDown: 15,
                 dontClearCanvas: false,
                 scrollingImageVisible: false,
                 initialResourceStore: 1000,
@@ -86,7 +86,7 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                         "<input type='hidden' id='transparency' class='world-parameters' name='Transparency' value='7'/>" +
 
                         "<p>Initial Population</p>" +
-                        "<input type='hidden' id='initialAgents' class='world-parameters' name='InitialAgents' value='50'/>" +
+                        "<input type='hidden' id='initialAgents' class='world-parameters' name='InitialAgents' value='20'/>" +
 
                         "<p>Chance Of Initiating Communication</p>" +
                         "<input type='hidden' id='chanceOfInitiatingCommunication' class='world-parameters' name='ChanceOfInitiatingCommunication' value='3'/>" +
@@ -94,29 +94,25 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                         "<p>Chance Of Responding To Communication</p>" +
                         "<input type='hidden' id='chanceOfRespondingToCommunication' class='world-parameters' name='ChanceOfRespondingToCommunication' value='3'/>" +
 
-                        "<p>Follow converter?</p>" +
-                        "<input type='checkbox' id='followConverter' class='world-parameters' name='FollowConverter' />" +
+                        "<p>Chance Of Human Reproducing</p>" +
+                        "<input type='hidden' id='chanceOfReproduction' class='world-parameters' name='ChanceOfReproduction' value='30'/>" +
 
-                        "<p>Show messages?</p>" +
-                        "<input type='checkbox' id='showMessages' class='world-parameters' name='ShowMessages' checked='checked' />" +
+                        "<p>Chance Of Zombie Consuming Humans</p>" +
+                        "<input type='hidden' id='chanceOfConsumption' class='world-parameters' name='ChanceOfConsumption' value='70'/>" +
 
-                        "<p>Average sustainability</p>" +
-                        "<input type='hidden' id='aveSustainability' class='world-parameters' name='AveSustainability' value='50'/>" +
+                        "<p>Chance Of Humans Producing (or Destroying) Robots</p>" +
+                        "<input type='hidden' id='chanceOfProduction' class='world-parameters' name='ChanceOfProduction' value='50'/>" +
 
-                        "<p>Standard deviation of sustainability</p>" +
-                        "<input type='hidden' id='stdDevSustainability' class='world-parameters' name='StdDevSustainability' value='15'/>" +
+                        "<p>Chance Of Humans Motivated to Destroy Robots</p>" +
+                        "<input type='hidden' id='chanceOfHumansBeingDestructive' class='world-parameters' name='ChanceOfHumansBeingDestructive' value='70'/>" +
 
-                        "<p>Threshold for improvement of neighbours</p>" +
-                        "<input type='hidden' id='thresholdToImproveNeighbours' class='world-parameters' name='ThresholdToImproveNeighbours' value='10'/>" +
+                        "<p>Chance Of Robots Destroying Zombies</p>" +
+                        "<input type='hidden' id='chanceOfDestruction' class='world-parameters' name='ChanceOfDestruction' value='70'/>" +
 
-                        "<p>Importance of equal resource types</p>" +
-                        "<input type='hidden' id='importanceOfEqualResourceTypes' class='world-parameters' name='ImportanceOfEqualResourceTypes' value='1'/>" +
+                        "<p>Show messages?" +
+                        "<input type='checkbox' id='showMessages' class='world-parameters' name='ShowMessages'  />" +
+                        "</p>" +
 
-                        "<p>Importance of moving to better housing</p>" +
-                        "<input type='hidden' id='importanceOfMovingToBetterHousing' class='world-parameters' name='ImportanceOfMovingToBetterHousing' value='1'/>" +
-
-                        "<p>Should residents ignore resources?</p>" +
-                        "<input type='checkbox' id='residentsDontFollowResources' class='world-parameters' name='ResidentsDontFollowResources' />" +
 
                         "",
                 conclusion: "Well done.",
@@ -125,20 +121,20 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                 },
                 setupParameters: function() {
                     FiercePlanet.Slider.createSlider("transparency", 0, 10, 1, 7);
-                    FiercePlanet.Slider.createSlider("initialAgents", 10, 300, 10, 150);
-                    FiercePlanet.Slider.createSlider("aveSustainability", 0, 100, 1, 50);
-                    FiercePlanet.Slider.createSlider("stdDevSustainability", 0, 40, 1, 15);
-                    FiercePlanet.Slider.createSlider("thresholdToImproveNeighbours", 0, 20, 1, 10);
-                    FiercePlanet.Slider.createSlider("importanceOfEqualResourceTypes", 0, 10, 1, 1);
-                    FiercePlanet.Slider.createSlider("importanceOfMovingToBetterHousing", 0, 10, 1, 1);
+                    FiercePlanet.Slider.createSlider("initialAgents", 5, 50, 5, 20);
                     FiercePlanet.Slider.createSlider("chanceOfInitiatingCommunication", 0, 10, 1, 3);
                     FiercePlanet.Slider.createSlider("chanceOfRespondingToCommunication", 0, 10, 1, 3);
+                    FiercePlanet.Slider.createSlider("chanceOfReproduction", 0, 100, 5, 30);
+                    FiercePlanet.Slider.createSlider("chanceOfConsumption", 0, 100, 5, 80);
+                    FiercePlanet.Slider.createSlider("chanceOfProduction", 0, 100, 5, 30);
+                    FiercePlanet.Slider.createSlider("chanceOfDestruction", 0, 100, 5, 40);
+                    FiercePlanet.Slider.createSlider("chanceOfHumansBeingDestructive", 0, 100, 5, 50);
 
                     FiercePlanet.Graph.setupData(
                         {label: 'Humans', color: '#00f', maxValue: 100}
-                        , {label: 'Zombies', color: '#888', maxValue: 100}
+                        , {label: 'Zombies', color: '#f00', maxValue: 100}
                         , {label: 'Robots', color: '#0f0', maxValue: 100}
-                        , {label: '% Converted', color: '#f00', maxValue: 100}
+                        , {label: '% Communicated', color: '#888', maxValue: 100}
                     );
                 },
                 handleParameters: function () {
@@ -154,6 +150,11 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                         , showMessages = ((FiercePlanet.Parameters.ShowMessages))
                         , chanceOfInitiatingCommunication = ((FiercePlanet.Parameters.ChanceOfInitiatingCommunication))
                         , chanceOfRespondingToCommunication = ((FiercePlanet.Parameters.ChanceOfRespondingToCommunication))
+                        , chanceOfReproduction = ((FiercePlanet.Parameters.ChanceOfReproduction))
+                        , chanceOfConsumption = ((FiercePlanet.Parameters.ChanceOfConsumption))
+                        , chanceOfProduction = ((FiercePlanet.Parameters.ChanceOfProduction))
+                        , chanceOfDestruction = ((FiercePlanet.Parameters.ChanceOfDestruction))
+                        , chanceOfHumansBeingDestructive = ((FiercePlanet.Parameters.ChanceOfHumansBeingDestructive))
 
                     //Universe.settings.godMode = !residentsDieOut;
                     world.allowResourcesOnPath = true;
@@ -162,6 +163,7 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                     var len = world.cells.length,
                         removedCells = [];
 
+                    var lineWidth = 2;
 
                     var humanCulture = _.clone(DefaultCultures.Stickman);
                     humanCulture.name = "Humans";
@@ -170,17 +172,23 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                     humanCulture.waveNumber = initialAgents;
                     humanCulture.initialSpeed = 10;
                     humanCulture.moveCost = 0;
-                    humanCulture.lineWidth = 1;
+                    humanCulture.lineWidth = lineWidth;
+                    humanCulture.encodingAccuracy = 1.0;
+                    humanCulture.decodingTolerance = 1.0;
+                    humanCulture.initFunction = function(agent, world) { agent.generalHealth = 100; };
 
                     var zombieCulture = _.clone(DefaultCultures.Stickman);
                     zombieCulture.name = "Zombies";
                     zombieCulture.style = "zombie";
-                    zombieCulture.color = one.color("#888");
+                    zombieCulture.color = one.color("#f00");
                     zombieCulture.waveNumber = initialAgents;
                     zombieCulture.initialSpeed = 30;
                     zombieCulture.moveCost = 0;
                     zombieCulture.customStickFunction = StickFigure.Walking;
-                    zombieCulture.lineWidth = 1;
+                    zombieCulture.lineWidth = lineWidth;
+                    zombieCulture.encodingAccuracy = 0.5;
+                    zombieCulture.decodingTolerance = 1.0;
+                    zombieCulture.initFunction = function(agent, world) { agent.generalHealth = 100; };
 
                     var robotCulture = _.clone(DefaultCultures.Stickman);
                     robotCulture.name = "Robots";
@@ -189,15 +197,21 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                     robotCulture.waveNumber = initialAgents;
                     robotCulture.initialSpeed = 20;
                     robotCulture.moveCost = 0;
-                    robotCulture.lineWidth = 1;
+                    robotCulture.customStickFunction = StickFigure.Walking;
+                    robotCulture.lineWidth = lineWidth;
+                    robotCulture.encodingAccuracy = 1.0;
+                    robotCulture.decodingTolerance = 0.5;
+                    robotCulture.initFunction = function(agent, world) { agent.generalHealth = 100; };
 
                     // Set up housing
-                    var poorCondition = one.color('#7F3300').alpha(1 - transparency);
+                    var condition = one.color('#fff').alpha(1 - transparency);
                     world.cells.forEach(function(cell) {
                         if (cell.agentsAllowed) {
-                            var sustainability = jStat.normal.sample(aveSustainability, stdDevSustainability);
-                            cell.sustainability = sustainability;
-                            cell.terrain = new Terrain(poorCondition.lightness(cell.sustainability / 100, true));
+                            cell.humanTerritory = 0;
+                            cell.zombieTerritory = 0;
+                            cell.robotTerritory = 0;
+
+                            cell.terrain = new Terrain(condition);
                         }
                     })
 
@@ -215,9 +229,8 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                     var world = this;
                     var counter = 0;
 
+
                     var initialAgents = parseInt(FiercePlanet.Parameters.InitialAgents)
-                        , aveSustainability = parseInt(FiercePlanet.Parameters.AveSustainability)
-                        , stdDefSustainability = parseInt(FiercePlanet.Parameters.StdDevSustainability)
                         , transparency = (parseInt(FiercePlanet.Parameters.Transparency)  / 10)
                         , thresholdToImproveNeighbours = (parseInt(FiercePlanet.Parameters.ThresholdToImproveNeighbours))
                         , importanceOfEqualResourceTypes = (parseInt(FiercePlanet.Parameters.ImportanceOfEqualResourceTypes))
@@ -228,52 +241,134 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                         , showMessages = (FiercePlanet.Parameters.ShowMessages)
                         , chanceOfInitiatingCommunication = (parseInt(FiercePlanet.Parameters.ChanceOfInitiatingCommunication))
                         , chanceOfRespondingToCommunication = (parseInt(FiercePlanet.Parameters.ChanceOfRespondingToCommunication))
+                        , chanceOfReproduction = ((FiercePlanet.Parameters.ChanceOfReproduction))
+                        , chanceOfConsumption = ((FiercePlanet.Parameters.ChanceOfConsumption))
+                        , chanceOfProduction = ((FiercePlanet.Parameters.ChanceOfProduction))
+                        , chanceOfDestruction = ((FiercePlanet.Parameters.ChanceOfDestruction))
+                        , chanceOfHumansBeingDestructive = ((FiercePlanet.Parameters.ChanceOfHumansBeingDestructive))
 
                     var len = world.currentAgents.length;
-                    /*
-                    if (initialAgents != len) {
-                        if (initialAgents < len) {
-                            for (var i = initialAgents; i < len; i++) {
-                                if (!_.isUndefined(world.currentAgents[i]) )
-                                    world.currentAgents[i].die(world)
-                            }
-                        }
-                        else if (initialAgents > len) {
 
-                            for (var i = len; i < initialAgents; i++) {
-                                var agent = world.currentAgents[Math.floor(len * Math.random())]
-                                var child = agent.spawn();
-                            }
-                        }
-                    }
-                    */
-
-
-                    //Universe.settings.godMode = !residentsDieOut;
-
-
-
-                    var died = 0;
-
-
-                    // Computes a rough estimate of the degree of distribution of resources relative to the number of resources outlayed.
-                    // Kurtosis overkill for this purpose?
-                    var stats = this.resourceStats();
-                    var resourceCounters = stats.array
-                        , min = stats.min
-                        , max = stats.max
-                        , len = stats.len
-                        , sum = stats.sum
-                        , range = stats.range
-                        , modLength = sum % len
-                        , normalisedDiff = range - modLength
-                        , relativeRange = range / sum
-                        , adjustedRelativeRange = Math.pow(relativeRange, 1 / importanceOfEqualResourceTypes)
 
 
                     // Draw speech bubble
                     FiercePlanet.Drawing.clearCanvas('#noticeCanvas');
                     var ctx = $('#noticeCanvas')[0].getContext('2d');
+
+                    var requestCodes = ["CONVERT?", "FOLLOW?"];
+                    var responses = ["YES!", "NO!"];
+
+                    _.shuffle(world.cells).forEach(function(cell) {
+                        if (cell.agentsAllowed && cell.agents.length >= 2) {
+                            var randomAgents = _.shuffle(cell.agents);
+
+                            var humans = _.map(world.currentAgents, function(agent) { return (agent.culture.name == "Humans" ? 1 : 0) ; })
+                                , totalHumans = Math.floor((_.reduce(humans, function(memo, num){ return memo + num; }, 0) / initialAgents) * 100)
+                                , zombies = _.map(world.currentAgents, function(agent) { return (agent.culture.name == "Zombies" ? 1 : 0) ; })
+                                , totalZombies = Math.floor((_.reduce(zombies, function(memo, num){ return memo + num; }, 0) / initialAgents) * 100)
+                                , robots = _.map(world.currentAgents, function(agent) { return (agent.culture.name == "Robots" ? 1 : 0) ; })
+                                , totalRobots = Math.floor((_.reduce(robots, function(memo, num){ return memo + num; }, 0) / initialAgents) * 100);
+
+                            var probInit = Math.random() * 10
+                                , probResponse = Math.random() * 10
+                                , communication = (probInit < chanceOfInitiatingCommunication && probResponse < chanceOfRespondingToCommunication);
+
+                            var firstAgent = randomAgents[0]
+                                , firstFigure = firstAgent.figure;
+                            var secondAgent = randomAgents[1]
+                                , secondFigure = secondAgent.figure;
+
+                            var code = "";
+                            if (firstAgent.culture.name == "Humans") {
+                                if (secondAgent.culture.name == "Humans") {
+                                    if (communication && Math.random() * 100 < chanceOfReproduction) {
+                                        var child = firstAgent.spawn();
+                                        child.culture = firstAgent.culture;
+                                    }
+                                    firstAgent.code = "REPRODUCE!";
+                                    firstAgent.codeTime = Lifecycle.waveCounter;
+                                }
+                                else if (secondAgent.culture.name == "Robots") {
+                                    if (communication && Math.random() * 100 < chanceOfProduction) {
+                                        var destroy =  Math.random() * 100 < chanceOfHumansBeingDestructive;
+                                        if (destroy && Math.random() * 100 < chanceOfDestruction) {
+                                            secondAgent.die(world);
+                                            firstAgent.code = "DIE ROBOT!";
+                                        }
+                                        else if (Math.random() * 100 < chanceOfProduction) {
+                                            var child = secondAgent.spawn();
+                                            child.culture = firstAgent.culture;
+                                            firstAgent.code = "BUILD ROBOT!";
+                                        }
+                                    }
+                                    firstAgent.codeTime = Lifecycle.waveCounter;
+                                }
+                            }
+                            else if (firstAgent.culture.name == "Zombies") {
+                                if (secondAgent.culture.name == "Humans") {
+                                    if (communication && Math.random() * 100 < chanceOfConsumption) {
+                                        secondAgent.culture = firstAgent.culture;
+                                        secondAgent.color = firstAgent.culture.color;
+                                        secondAgent.speed = firstAgent.speed;
+                                        secondAgent.master = firstAgent;
+                                    }
+                                    firstAgent.code = "BE A ZOMBIE!";
+                                    firstAgent.codeTime = Lifecycle.waveCounter;
+                                }
+                                else if (secondAgent.culture.name == "Zombies") {
+                                    if (communication) {
+                                        secondAgent.master = firstAgent;
+                                    }
+                                    else {
+                                        secondAgent.master = undefined;
+                                    }
+                                    firstAgent.code = "FOLLOW ME!";
+                                    firstAgent.codeTime = Lifecycle.waveCounter;
+                                }
+                            }
+                            else if (firstAgent.culture.name == "Robots") {
+                                if (secondAgent.culture.name == "Zombies") {
+                                    if (communication && Math.random() * 100 < chanceOfDestruction) {
+                                        secondAgent.die(world);
+                                    }
+                                    firstAgent.code = "DIE ZOMBIE!"
+                                    firstAgent.codeTime = Lifecycle.waveCounter;
+                                }
+                                else if (secondAgent.culture.name == "Robots") {
+                                    firstAgent.code = "ROBOT TALK!"
+                                    firstAgent.codeTime = Lifecycle.waveCounter;
+                                }
+                            }
+
+                            if (showMessages && firstAgent.code && firstAgent.codeTime < Lifecycle.waveCounter + 1000) {
+                                if (!_.isUndefined(firstFigure)) {
+
+                                    ctx.save();
+                                    ctx.translate(FiercePlanet.Orientation.halfWorldWidth, FiercePlanet.Orientation.halfWorldHeight);
+                                    ctx.rotate(FiercePlanet.Orientation.rotationAngle);
+                                    //ctx.scale();
+
+                                    firstFigure.direction = 0;
+
+                                    firstFigure.direction = 1;
+                                    firstFigure.drawSpeechBubble(ctx, firstAgent.code);
+                                    ctx.strokeStyle = firstAgent.color.hex();
+                                    ctx.stroke();
+                                    if (!_.isUndefined(secondFigure)) {
+                                        var message = (communication ? "YES!" : "NO!")
+                                        secondFigure.direction = 0;
+                                        secondFigure.drawSpeechBubble(ctx, message);
+                                        ctx.strokeStyle = secondAgent.color.hex();
+                                        ctx.stroke();
+                                    }
+//                                FiercePlanet.Game.pauseGame();
+                                    ctx.restore();
+                                }
+                            }
+                        }
+                    })
+
+
 
                     _.shuffle(world.cells).forEach(function(cell) {
                         if (cell.agentsAllowed && cell.agents.length >= 2) {
@@ -284,169 +379,77 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                             var firstAgent = randomAgents[0]
                                 , firstFigure = firstAgent.figure;
 
-                            var humans = _.map(world.currentAgents, function(agent) { return (agent.culture.name == "Humans" ? 1 : 0) ; })
-                                , totalHumans = Math.floor((_.reduce(humans, function(memo, num){ return memo + num; }, 0) / initialAgents) * 100)
-                                , zombies = _.map(world.currentAgents, function(agent) { return (agent.culture.name == "Zombies" ? 1 : 0) ; })
-                                , totalZombies = Math.floor((_.reduce(zombies, function(memo, num){ return memo + num; }, 0) / initialAgents) * 100)
-                                , robots = _.map(world.currentAgents, function(agent) { return (agent.culture.name == "Robots" ? 1 : 0) ; })
-                                , totalRobots = Math.floor((_.reduce(robots, function(memo, num){ return memo + num; }, 0) / initialAgents) * 100);
-
-                            if (converted) {
-                                for (var i = 1; i < randomAgents.length; i++) {
-                                    var agent = randomAgents[i];
-                                    //agent.culture.name == "Humans" &&
-                                    if (firstAgent.culture.name != agent.culture.name && firstAgent.master != agent) {
-                                        agent.culture = firstAgent.culture;
-                                        agent.color = firstAgent.culture.color;
-                                        agent.master = firstAgent;
-                                        firstAgent.hasMadeConvert = true;
-                                    }
-
-                                }
-                            }
-                            if (showMessages) {
-                                if (!_.isUndefined(firstFigure) && firstAgent.hasMadeConvert) {
-                                    firstAgent.hasMadeConvert = false;
-
-                                    ctx.save();
-                                    ctx.translate(FiercePlanet.Orientation.halfWorldWidth, FiercePlanet.Orientation.halfWorldHeight);
-                                    ctx.rotate(FiercePlanet.Orientation.rotationAngle);
-                                    //ctx.scale();
-
-                                    firstFigure.direction = 0;
-                                    firstFigure.drawSpeechBubble(ctx, "CONVERT!");
-                                    ctx.strokeStyle = firstAgent.color.hex();
-                                    ctx.stroke();
-                                    for (var i = 1; i < randomAgents.length; i++) {
-                                        var agent = randomAgents[i]
-                                            , figure = agent.figure;
-                                        if (firstAgent.culture.name != agent.culture.name && firstAgent.master != agent) {
-                                            if (!_.isUndefined(figure)) {
-                                                var message = (converted ? "YES!" : "NO!")
-                                                figure.direction = 1;
-                                                figure.drawSpeechBubble(ctx, message);
-                                                ctx.strokeStyle = firstAgent.color.hex();
-                                                ctx.stroke();
-                                            }
-
-                                        }
-                                    }
-//                                FiercePlanet.Game.pauseGame();
-                                    ctx.restore();
-                                }
-                            }
-                        }
-                    })
-
-                    /*
-
-
-                    // Adjust quality based on neighbouring values
-                    _.shuffle(world.cells).forEach(function(cell) {
-                        if (cell.agentsAllowed) {
-                            var x = cell.x, y = cell.y;
-                            cell.newSustinability = cell.sustainability;
-                            var sustainability = cell.sustainability;
-                            var neighbours = world.getNeighbouringCells(x, y),
-                                sustainabilities = _.chain(neighbours).map(function(neighbour) { if (neighbour.agentsAllowed) return neighbour.sustainability}).compact().sortBy(function(e) {return e}).value(),
-                                midPoint = Math.floor(sustainabilities.length / 2),
-                                topHalf = _.rest(sustainabilities, midPoint),
-                                topHalfMean = jStat.mean(topHalf),
-                                bottomHalf = _.first(sustainabilities, midPoint),
-                                bottomHalfMean = jStat.mean(bottomHalf),
-                                maxQuality = 0,
-                                cumQuality = 0,
-                                aveQuality;
-
-                            // Top half mean
-                            if ((topHalfMean - sustainability) > thresholdToImproveNeighbours ) {
-                                cell.newSustainability = cell.sustainability + 1;
-                            }
-
-                            // Bottom half mean
-//                            if (( sustainability - bottomHalfMean) < thresholdToImproveNeighbours) {
-//                                cell.newSustainability = cell.sustainability - 1;
-//                            }
-                        }
-                    })
-
-                    _.shuffle(world.cells).forEach(function(cell) {
-                        if (cell.agentsAllowed && cell.agents.length == 0) {
-                            if (!_.isUndefined(cell.newSustainability) && cell.newSustainability <= 100 && cell.sustainability != cell.newSustainability) {
-                                cell.sustainability = cell.newSustainability;
-                                cell.newSustainability = cell.sustainability;
-                            }
-                        }
-                    })
-                    _.shuffle(world.cells).forEach(function(cell) {
-                        var x = cell.x, y = cell.y;
-                        var sustainability = cell.sustainability;
-                        var adjusted = false;
-                        var neighbourResources = (world.getNeighbouringResources(x, y));
-                        neighbourResources.forEach(function(neighbour) {
-                            if (neighbour.totalYield > neighbour.perAgentYield) {
-                                var adjustedYield = neighbour.perAgentYield * ( 1 - adjustedRelativeRange);
-//                                neighbour.totalYield -= neighbour.perAgentYield;
-//                                neighbour.totalYield -= adjustedYield;
-                                neighbour.totalYield --;
-                                if (cell.sustainability + adjustedYield < 100)
-                                    cell.sustainability += adjustedYield;
-                                else
-                                    cell.sustainability = 100;
-                                adjusted = true;
-                            }
-                        });
-                        // Adjust the sustainability for the number of agents on the cell
-                        if (! adjusted) {
-                            cell.sustainability -= (cell.agents.length);
                         }
                     })
 
                     // Adjust color based on quality
-                    var poorCondition = one.color('#7F3300').alpha(1 - transparency);
+                    var dilutionFactor = 0.5, correction = 1 - dilutionFactor;
                     world.cells.forEach(function(cell) {
                         if (cell.agentsAllowed) {
-                            var quality = (cell.sustainability > 100 ) ? 100 : cell.sustainability;
-                            cell.terrain = new Terrain(poorCondition.lightness(quality / 100, true));
+                            var randomAgents = _.shuffle(cell.agents);
+
+                            var humans = _.map(randomAgents, function(agent) { return (agent.culture.name == "Humans" ? 1 : 0) ; })
+                                , totalHumans = Math.floor((_.reduce(humans, function(memo, num){ return memo + num; }, 0) / randomAgents.length))
+                                , zombies = _.map(randomAgents, function(agent) { return (agent.culture.name == "Zombies" ? 1 : 0) ; })
+                                , totalZombies = Math.floor((_.reduce(zombies, function(memo, num){ return memo + num; }, 0) / randomAgents.length))
+                                , robots = _.map(randomAgents, function(agent) { return (agent.culture.name == "Robots" ? 1 : 0) ; })
+                                , totalRobots = Math.floor((_.reduce(robots, function(memo, num){ return memo + num; }, 0) / randomAgents.length));
+
+                            if (parseInt(totalHumans))
+                                cell.humanTerritory += totalHumans;
+                            if (parseInt(totalZombies))
+                                cell.zombieTerritory += totalZombies;
+                            if (parseInt(totalRobots))
+                                cell.robotTerritory += totalRobots;
+                            var total = cell.humanTerritory + cell.zombieTerritory + cell.robotTerritory;
+                            var b = (cell.humanTerritory / total) * 255,
+                                r = (cell.zombieTerritory / total) * 255,
+                                g = (cell.robotTerritory / total) * 255;
+
+                            var color  = one.color('rgb(' + r + ', ' + g + ', ' + b + ', ' + (1 - transparency) + ')')
+                            if (color)
+                                cell.terrain = new Terrain(color);
+
+                            /*
+                            if (cell.humanTerritory > cell.zombieTerritory && cell.humanTerritory > cell.robotTerritory) {
+                                var largestDiff = cell.humanTerritory - (cell.zombieTerritory < cell.robotTerritory ? cell.zombieTerritory : cell.robotTerritory);
+                                var smallestDiff = cell.humanTerritory -  (cell.zombieTerritory < cell.robotTerritory ? cell.robotTerritory : cell.zombieTerritory);
+                                var ratio =  ((smallestDiff / largestDiff) / cell.humanTerritory) * dilutionFactor;
+                                cell.terrain = new Terrain(one.color("#00f").lightness(correction + ratio, true));
+                            }
+                            else if (cell.zombieTerritory > cell.humanTerritory && cell.zombieTerritory > cell.robotTerritory) {
+                                var largestDiff = cell.zombieTerritory - (cell.humanTerritory < cell.robotTerritory ? cell.humanTerritory : cell.robotTerritory);
+                                var smallestDiff = cell.zombieTerritory - (cell.humanTerritory < cell.robotTerritory ? cell.robotTerritory : cell.humanTerritory);
+                                var ratio =  ((smallestDiff / largestDiff) / cell.zombieTerritory) * dilutionFactor;
+                                cell.terrain = new Terrain(one.color("#888").lightness(correction + ratio, true));
+                            }
+                            else if (cell.robotTerritory > cell.humanTerritory && cell.robotTerritory > cell.zombieTerritory) {
+                                var largestDiff = cell.robotTerritory - (cell.zombieTerritory < cell.humanTerritory ? cell.zombieTerritory : cell.humanTerritory);
+                                var smallestDiff = cell.robotTerritory - (cell.zombieTerritory < cell.humanTerritory ? cell.humanTerritory : cell.zombieTerritory);
+                                var ratio =  ((smallestDiff / largestDiff) / cell.robotTerritory) * dilutionFactor;
+                                cell.terrain = new Terrain(one.color("#0f0").lightness(correction + ratio, true));
+                            }
+                            else {
+                                cell.terrain = new Terrain(one.color("#fff"));
+                            }
+                            */
+
                         }
                     })
-                    */
+
 
                     // Move agents
                     var moveCapability = Capabilities.MoveRandomlyCapability, nullifiedAgents = [];
                     var moveToBetterHousing = new Capability();
-                    /*
-                    (function() {
-                        this.name = 'MoveToBetterHousing';
-                        this.cost = 0;
-                        this.exercise = function(agent, world) {
-                            var currentCell = world.getCell(agent.x, agent.y),
-                                currentCellQuality = currentCell.sustainability,
-                                positions = world.getCellsAtDistance(agent.x, agent.y, 1, Distance.CHEBYSHEV_DISTANCE, false),
-                                moveablePositions = _.chain(positions).map(function(cell) {if (cell.agentsAllowed) return cell; }).compact().shuffle().value();
-
-                            var candidateCell = currentCell;
-                            for (var i = 0; i < moveablePositions.length; i++) {
-                                var testPosition = moveablePositions[i];
-                                if (testPosition.sustainability - currentCellQuality > importanceOfMovingToBetterHousing) {
-                                    candidateCell = testPosition;
-                                    break;
-                                }
-                            }
-
-                            if (!_.isUndefined(candidateCell))
-                                agent.moveTo(candidateCell.x, candidateCell.y);
-                        };
-                    }).apply(moveToBetterHousing);
-                    */
                     world.currentAgents.forEach(function(agent) {
                         if (Lifecycle.waveCounter >= agent.delay && agent.countdownToMove % agent.speed == 0) {
-                            if (followConverter && !_.isUndefined(agent.master) && (agent.master.x != agent.x && agent.master.y != agent.y)) {
+                            if (!_.isUndefined(agent.master) && (agent.master.x != agent.x && agent.master.y != agent.y)) {
                                 agent.moveTo(agent.master.x, agent.master.y);
                             }
                             else {
                                 moveCapability.exercise(agent, world);
                             }
+                            agent.generalHealth = agent.generalHealth - 1;
                             /*
                             if (agent.culture.name == 'Humans') {
                                 if (residentsDontFollowResources) {
@@ -461,77 +464,17 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
                     });
 
                     // Die
-//                    if (residentsDieOut) {
-//                        world.currentAgents.forEach(function(agent) {
-//                            if (agent.health < 0)
-//                                agent.die(world);
-//                        });
-//                    }
+                    world.currentAgents.forEach(function(agent) {
+                        if (agent.generalHealth < 0)
+                            agent.die(world);
+                    });
 
 
-                    // Reproduce
-                    /*
-                     if (world.currentAgents.length < 400) {
-                     world.currentAgents.forEach(function(agent) {
-                     if (agent.gender == 'f' && agent.age >= 15 && agent.age <= 45) {
-                     var r = Math.random();
-                     // Diminishing likelihood of children
-                     if (r < Math.pow(reproductionProbability,  agent.childCount + 1)) {
-                     var child = agent.spawn();
-                     child.infected = false;
-                     child.generalHealth = 100;
-                     child.color = '#f00';
-                     child.gender = (Math.random() < .5 ? 'm' : 'f');
-                     child.childCount = 0;
-                     world.children ++;
-                     }
-                     }
-                     });
-                     }
-                     */
-                    world.recoverResources();
                     FiercePlanet.Drawing.clearCanvas('#baseCanvas');
                     FiercePlanet.Drawing.clearCanvas('#resourceCanvas');
                     FiercePlanet.Drawing.drawPath();
 
 
-                    // Calculate affordability
-                    var affordability = 0
-                        , sustainability = 0
-                        , mixedUse = 0;
-
-                    // Calculate housing density
-                    var housing = 0, land = world.cells.length;
-                    world.resources.forEach(function(resource) {
-                        var code = resource.kind.code;
-                        if (code == 'low') {
-                            housing += 15;
-                        }
-                        else if (code == 'medium') {
-                            housing += 30;
-                        }
-                        else if (code == 'high') {
-                            housing += 50;
-                        }
-                        else {
-                            housing -= 25;
-                        }
-                    });
-
-                    var pop = world.currentAgents.length * 100;
-
-                    affordability = housing / pop
-                    affordability = (affordability > 1 ? 1 : affordability);
-
-                    // Make affordability L-shaped rather than linear
-                    affordability = Math.pow(affordability, 1 / 3)
-
-                    // Normalise
-                    affordability = affordability * 100;
-
-
-                    // Calculate mixed use
-                    mixedUse = (1 - stats.cappedCoeffvar) * 100
 
                     // Calculate sustainability
                     var humans = _.map(world.currentAgents, function(agent) { return (agent.culture.name == "Humans" ? 1 : 0) ; })
@@ -567,9 +510,9 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
         module.id = 'Fierce Planet Simulator';
         module.registerSelf();
         module.registerCampaign(FiercePlanetSimWorlds);
-        module.currentCampaignID = 'WorldVision';
+        module.currentCampaignID = 'FiercePlanetSimulator';
         module.registerResourceSet(TBL);
-        Lifecycle.waveDelay = 3000;
+        Lifecycle.waveDelay = 1000;
 
         _.extend(Universe.settings, {
             isometricView: false,
@@ -584,13 +527,12 @@ var FiercePlanetSimModule = FiercePlanetSimModule || {};
             currentCampaignID: 'WorldVision',
             currentWorldPreset: true,
             currentWorldNumber: 0,
-            interval: 1000,
             worldDelay: 300
         })
-//        _.extend(FiercePlanet.Orientation, {
-//            worldWidth: 800,
-//            worldHeight: 600
-//        })
+        _.extend(FiercePlanet.Orientation, {
+            worldWidth: 800,
+            worldHeight: 600
+        })
 
     };
 }).apply(FiercePlanetSimModule);

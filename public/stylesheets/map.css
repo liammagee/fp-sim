@@ -8,7 +8,7 @@
 }
 #world-container {
   width: 72%;
-  height: 82%;
+  height: 76%;
 }
 #nav {
   width: 24%;
@@ -16,5 +16,5 @@
   min-height: 600px;
 }
 #NF {
-  height: 800px;
+  min-height: 800px;
 }

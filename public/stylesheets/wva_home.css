@@ -29,7 +29,6 @@
   left: 950px;
 }
 #NF {
-  height: 590px;
   position: relative;
   background: none;
 }
@@ -37,7 +36,6 @@
 .NFShow {
   width: 100%;
   /*height: 460px; */
-  position: absolute;
   /* display: none; */
 }
 #NFLoading {
